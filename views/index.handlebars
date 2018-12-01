@@ -1,0 +1,87 @@
+<div class="container">
+    {{#each article}}
+
+    <div class="card" style="width:100%">
+        <div class="card-body">
+            <h5 class="card-title">{{title}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted"><a href={{link}}>Go to articles from here</a></h6>
+            <p class="card-text">{{summary}}</p>
+
+                    
+                    <a href="/commentForm/{{id}}">
+                
+                
+                <button type="submit" value={{id}} class="btn btn-primary commentBtn"> Leave Comment </button>
+                </a>
+                
+        </div>
+
+      
+
+         
+    
+
+
+     
+
+
+    </div>
+
+                {{#each comment}}
+
+    <div class="card" style="width:100%">
+        <div class="card-body">
+            <h5 class="card-title">{{name}}</h5>
+          
+            <p class="card-text">{{com}}</p>
+
+             <button type="submit" value={{id}} class="btn btn-primary deleteBtn">  Delete Comment</button> 
+
+        </div>
+    </div>
+
+                    {{/each}}
+
+
+
+
+    {{/each}}
+
+
+</div>
+
+
+<script type="text/javascript">
+
+
+    function deleteComment (event) {
+
+      console.log("working")
+
+        event.preventDefault();
+
+
+        var btnID = $(this).attr("value")
+
+           $.ajax({
+            method: "DELETE",
+            url: "/comment/" + btnID
+        })
+            .then(function (data) {
+
+                console.log(data)
+
+            });
+
+
+        
+    }
+
+    $(document).on("click", ".deleteBtn", deleteComment);
+
+
+
+
+
+
+</script>
